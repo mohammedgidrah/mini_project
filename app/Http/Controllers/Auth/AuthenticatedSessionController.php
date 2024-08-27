@@ -31,9 +31,9 @@ class AuthenticatedSessionController extends Controller
         
         // Check the user's role and redirect accordingly
         if (Auth::user()->role === 'admin') {
-            return redirect()->intended('dashboard'); // Redirect admin to dashboard
+            return redirect()->intended('dashboard'); 
         } elseif(Auth::user()->role === 'user') {
-            return redirect()->intended('/master'); // Redirect regular user to home page
+            return redirect()->intended('/'); 
         }
     }
 
@@ -43,11 +43,12 @@ class AuthenticatedSessionController extends Controller
     public function destroy(Request $request): RedirectResponse
     {
         Auth::guard('web')->logout();
-
+    
         $request->session()->invalidate();
-
+    
         $request->session()->regenerateToken();
-
-        return redirect('/');
+    
+        return redirect()->route('home');
     }
+    
 }

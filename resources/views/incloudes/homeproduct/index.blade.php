@@ -1,13 +1,7 @@
-    {{-- @extends('layout.master')
-    @section('content') --}}
-        
-    <section id="product" class="why-us section">
-
-        <div class="container">
-
-            <div class="row no-gutters">
-                {{-- @dd($product); --}}
-                {{-- @foreach ($products as $p)
+<section id="product" class="why-us section">
+    <div class="container">
+        <div class="row no-gutters">
+            @foreach ($products as $p)
                 <div class="col-md-4">
                     <div class="card mb-4">
                         <img src="{{ $p->image_url }}" class="card-img-top" alt="{{ $p->name }}">
@@ -18,12 +12,7 @@
                         </div>
                     </div>
                 </div>
-                @endforeach --}}
-                
-
-            </div>
-
+            @endforeach
         </div>
-
-    </section><!-- /Why Us Section -->
-    {{-- @endsection --}}
+    </div>
+</section>

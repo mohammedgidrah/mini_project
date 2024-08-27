@@ -135,10 +135,7 @@
     {{-- @include('includes.header') --}}
     <div class="container">
         <h1>All users</h1>
-        {{-- <a href="{{ route('product.create') }}" class="btn btn-primary mb-3">Add Product</a> --}}
-        <form action="{{ route('product.show', 1) }}" method="get">
-            <button type="submit" class="btn btn-primary mb-3">View Deleted Items</button>
-        </form>
+
 
         @if (session('success'))
             <div class="alert alert-success">
@@ -169,7 +166,7 @@
                     {{-- <td>{{ $user->category->category_name ?? 'No Category' }}</td> <!-- Corrected relationship access --> --}}
                     
                     <td>
-                        {{-- <a href="{{ route('user.edit', $user->id) }}" class="btn btn-warning">Edit</a> --}}
+                        <a href="{{ route('user.edit', $user->id) }}" class="btn btn-warning">Edit</a>
                         <form action="{{ route('user.destroy', $user->id) }}" method="POST" style="display:inline;">
                             @csrf
                             @method('DELETE')

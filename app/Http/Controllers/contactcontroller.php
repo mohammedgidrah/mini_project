@@ -2,9 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\contact;
-
+use Illuminate\Http\Request;
 
 class contactcontroller extends Controller
 {
@@ -14,41 +13,56 @@ class contactcontroller extends Controller
     public function index()
     {
         $contacts = contact::all();
-        return view('contact.index', compact('contacts'));    }
+        return view('contact.index', compact('contacts'));
+    }
 
     /**
      * Show the form for creating a new resource.
      */
     public function create()
     {
-        return view('contact.create');
+        // return view('contact.create');
     }
 
     /**
      * Store a newly created resource in storage.
      */
+
+    // $request->validate([
+    //     'name' => 'required|max:255|string',
+    //     'email' => 'required|string',
+    //     'subject' => 'required|string',
+    //     'message' => 'required|string',
+    // ]);
+    // $name = $request->name;
+    // $email = $request->email;
+    // $subject = $request->subject;
+    // $message = $request->message;
+
+    // $contacts = contact::create(["name"=>$name,'email'=>$email,'subject'=>$subject,"message"=>$message]);
+
+    // return redirect()->route('layout.master');
     public function store(Request $request)
     {
+        // Validate the request
         $request->validate([
-            'name' => 'required|max:255|string',
-            'email' => 'required|string',
-            'subject' => 'required|string',
-            'message' => 'required|string',
+            'name' => 'required|string|max:255',
+            'email' => 'required|email',
+            'subject' => 'required|string|max:255',
+            'message' => 'required|string|max:255',
         ]);
-        $name = $request->name;
-        $email = $request->email;
-        $subject = $request->subject;
-        $message = $request->message;
-    
-        
-        $contacts = contact::create(["name"=>$name,'email'=>$email,'subject'=>$subject,"message"=>$message]);
 
+        // Create the contact entry
+        Contact::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'subject' => $request->subject,
+            'message' => $request->message,
+        ]);
 
-    
-
-    
-        return redirect()->route('contact.index');
-        }
+        // Instead of returning a view, just return a simple response
+        return redirect()->back()->with('success', 'Message sent successfully!');
+    }
 
     /**
      * Display the specified resource.
@@ -81,6 +95,7 @@ class contactcontroller extends Controller
     {
         $contacts = contact::find($id);
         $contacts->delete();
-    
-        return redirect()->route('contact.index')->with('success', 'contact deleted successfully.');    }
+
+        return redirect()->route('contact.index')->with('success', 'contact deleted successfully.');
+    }
 }

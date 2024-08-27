@@ -1,7 +1,7 @@
 @include('incloudes.header')
 
 @include('incloudes.hero')
-@include('incloudes.product')
+{{-- @include('homeproduct.index') --}}
 {{-- @include('incloudes.category') --}}
 @include('incloudes.contact')
 
